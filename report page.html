@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics and Reporting</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #7754F6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .analytics-data, .insights-data {
+            margin-top: 15px;
+        }
+
+        .analytics-data div, .insights-data div {
+            background: #f5f5ff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #6442d1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analytics and Reporting</h1>
+
+        <!-- User Analytics Section -->
+        <div class="section">
+            <h2>User Analytics</h2>
+            <p>Track user engagement, challenges, and progression to improve content.</p>
+            <div class="analytics-data" id="analyticsData">
+                <!-- User Analytics Data Will Be Populated Dynamically -->
+            </div>
+            <button class="btn" id="loadAnalytics">Load Analytics</button>
+        </div>
+
+        <!-- Tutor Insights Section -->
+        <div class="section">
+            <h2>Tutor Insights</h2>
+            <p>Access reports showing common difficulties for classes or individuals.</p>
+            <div class="insights-data" id="insightsData">
+                <!-- Tutor Insights Data Will Be Populated Dynamically -->
+            </div>
+            <button class="btn" id="loadInsights">Load Insights</button>
+        </div>
+    </div>
+
+    <script>
+        // Dummy data for demonstration
+        const userAnalytics = [
+            { id: 1, name: "User Engagement", value: "78% active users last week" },
+            { id: 2, name: "Common Challenge", value: "Difficulty in Module 2" },
+            { id: 3, name: "Overall Progression", value: "Average completion rate: 65%" }
+        ];
+
+        const tutorInsights = [
+            { id: 1, category: "Class A", difficulty: "Topic: Advanced Grammar" },
+            { id: 2, category: "Class B", difficulty: "Module 3 Assessments" },
+            { id: 3, category: "Individual - User 5", difficulty: "Struggles with Debugging" }
+        ];
+
+        // Functions to dynamically populate analytics data
+        const analyticsDataContainer = document.getElementById("analyticsData");
+        const insightsDataContainer = document.getElementById("insightsData");
+
+        document.getElementById("loadAnalytics").addEventListener("click", () => {
+            analyticsDataContainer.innerHTML = userAnalytics.map(item => `
+                <div>
+                    <strong>${item.name}:</strong> ${item.value}
+                </div>
+            `).join("");
+        });
+
+        document.getElementById("loadInsights").addEventListener("click", () => {
+            insightsDataContainer.innerHTML = tutorInsights.map(item => `
+                <div>
+                    <strong>${item.category}:</strong> ${item.difficulty}
+                </div>
+            `).join("");
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Mastery - Performance & Progress</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #7754F6;
+            --secondary-color: #F0ECFF;
+            --text-color: #333;
+            --background-color: #FFFFFF;
+            --chart-background: #F9F7FF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .performance-card, .progress-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(119, 84, 246, 0.1);
+            padding: 30px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-header h2 {
+            color: var(--primary-color);
+            font-size: 22px;
+        }
+
+        .performance-chart, .progress-chart {
+            background-color: var(--chart-background);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .performance-timeline {
+            display: flex;
+            justify-content: space-between;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .timeline-value {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .timeline-label {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .skill-progress {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .skill-info {
+            flex-grow: 1;
+        }
+
+        .skill-bar {
+            width: 200px;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .achievements {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .achievement-item {
+            text-align: center;
+        }
+
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="performance-card">
+            <div class="card-header">
+                <h2>Performance History</h2>
+                <span>Last 6 Months</span>
+            </div>
+            
+            <div class="performance-chart">
+                Performance Chart Placeholder
+            </div>
+            
+            <div class="performance-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-value">42</div>
+                    <div class="timeline-label">Total Sessions</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-value">89%</div>
+                    <div class="timeline-label">Accuracy</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-value">326</div>
+                    <div class="timeline-label">Points</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-card">
+            <div class="card-header">
+                <h2>Progress Tracking</h2>
+                <span>Current Skills</span>
+            </div>
+            
+            <div class="progress-chart">
+                <div class="skill-progress">
+                    <div class="skill-info">Algebra</div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 75%"></div>
+                    </div>
+                    <div class="skill-percentage">75%</div>
+                </div>
+                <div class="skill-progress">
+                    <div class="skill-info">Geometry</div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 60%"></div>
+                    </div>
+                    <div class="skill-percentage">60%</div>
+                </div>
+                <div class="skill-progress">
+                    <div class="skill-info">Calculus</div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: 45%"></div>
+                    </div>
+                    <div class="skill-percentage">45%</div>
+                </div>
+            </div>
+            
+            <div class="achievements">
+                <div class="achievement-item">
+                    <div class="achievement-icon">🏆</div>
+                    <div>Algebra Pro</div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">🌟</div>
+                    <div>Geometry Master</div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">🚀</div>
+                    <div>Problem Solver</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Book</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #7754F6;
+            --secondary-color: #F0ECFF;
+            --background-color: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--background-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .purchase-button {
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .purchase-button:hover {
+            background-color: #5a3bc9;
+        }
+
+        .map-container {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Purchase Book</h1>
+        <p>Click the button below to purchase the book or find nearby stores where you can buy it.</p>
+        <button class="purchase-button" id="purchaseButton">Purchase Online</button>
+        <p>Or find a bookstore near you:</p>
+        <div id="map" class="map-container"></div>
+    </div>
+
+    <script>
+        // Initialize Google Map
+        function initMap() {
+            // Default location (centered on New York City)
+            const defaultLocation = { lat: 40.7128, lng: -74.0060 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: defaultLocation,
+            });
+
+            // Create a search service
+            const service = new google.maps.places.PlacesService(map);
+            const infowindow = new google.maps.InfoWindow();
+
+            // Try to use user's current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        map.setCenter(userLocation);
+
+                        // Search for bookstores near the user's location
+                        service.nearbySearch(
+                            {
+                                location: userLocation,
+                                radius: 5000, // 5 km radius
+                                type: "book_store",
+                            },
+                            (results, status) => {
+                                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                    for (let i = 0; i < results.length; i++) {
+                                        createMarker(results[i]);
+                                    }
+                                }
+                            }
+                        );
+                    },
+                    () => {
+                        handleLocationError(true, map.getCenter(), map);
+                    }
+                );
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, map.getCenter(), map);
+            }
+
+            // Create a marker for each store
+            function createMarker(place) {
+                const marker = new google.maps.Marker({
+                    map,
+                    position: place.geometry.location,
+                });
+
+                // Show store details on marker click
+                google.maps.event.addListener(marker, "click", () => {
+                    infowindow.setContent(place.name + "<br>" + place.vicinity);
+                    infowindow.open(map, marker);
+                });
+            }
+
+            // Handle geolocation errors
+            function handleLocationError(browserHasGeolocation, pos, map) {
+                const infoWindow = new google.maps.InfoWindow({
+                    position: pos,
+                    content: browserHasGeolocation
+                        ? "Error: The Geolocation service failed."
+                        : "Error: Your browser doesn't support geolocation.",
+                });
+                infoWindow.open(map);
+            }
+        }
+
+        // Purchase button functionality
+        document.getElementById("purchaseButton").addEventListener("click", () => {
+            // Redirect to purchase page (replace with your URL)
+            window.location.href = "https://example.com/purchase";
+        });
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"
+        async
+        defer
+    ></script>
+</body>
+</html>
+
+

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Summary</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #7754F6;
+            --secondary-color: #F0ECFF;
+            --success-color: #4CAF50;
+            --error-color: #F44336;
+            --background-color: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .summary-container {
+            background-color: var(--background-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .summary-stat {
+            margin: 15px 0;
+        }
+
+        .stat-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .retry-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .retry-button:hover {
+            background-color: #5a3bc9;
+        }
+
+        .feedback-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+        }
+
+        .feedback-text {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary-container">
+        <h1>Session Summary</h1>
+        <div class="summary-stat">
+            <div class="stat-label">Total Questions:</div>
+            <div class="stat-value" id="totalQuestions">10</div>
+        </div>
+        <div class="summary-stat">
+            <div class="stat-label">Correct Answers:</div>
+            <div class="stat-value" id="correctAnswers">7</div>
+        </div>
+        <div class="summary-stat">
+            <div class="stat-label">Accuracy:</div>
+            <div class="stat-value" id="accuracy">70%</div>
+        </div>
+
+        <div class="feedback-section">
+            <div class="feedback-text" id="feedbackText">
+                Great effort! Review the topics where you made mistakes and try again.
+            </div>
+        </div>
+
+        <button class="retry-button" id="retryButton">Retry</button>
+    </div>
+
+    <script>
+        // Example data (replace with actual session data)
+        const totalQuestions = 10;
+        const correctAnswers = 7;
+        const accuracy = Math.round((correctAnswers / totalQuestions) * 100);
+
+        // Populate the summary data
+        document.getElementById('totalQuestions').textContent = totalQuestions;
+        document.getElementById('correctAnswers').textContent = correctAnswers;
+        document.getElementById('accuracy').textContent = `${accuracy}%`;
+
+        // Retry button functionality
+        document.getElementById('retryButton').addEventListener('click', () => {
+            // Redirect to quiz start page (replace URL with your quiz page)
+            window.location.href = "quiz.html";
+        });
+    </script>
+</body>
+</html>
+

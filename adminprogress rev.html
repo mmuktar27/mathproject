@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Progress View</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .user-select {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .progress-summary {
+            margin-top: 20px;
+        }
+
+        .progress-summary h2 {
+            font-size: 20px;
+            color: #444;
+        }
+
+        .progress-details {
+            margin-top: 10px;
+        }
+
+        .progress-details p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .strength, .weakness {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .strength {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .weakness {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Progress View</h1>
+        <div class="user-select">
+            <label for="userSelect">Select a User:</label>
+            <select id="userSelect">
+                <option value="">-- Choose a User --</option>
+                <option value="user1">User 1</option>
+                <option value="user2">User 2</option>
+                <option value="user3">User 3</option>
+            </select>
+        </div>
+
+        <div class="progress-summary" id="progressSummary">
+            <h2>User Progress Summary</h2>
+            <div class="progress-details" id="progressDetails">
+                <!-- User progress details will load here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userProgressData = {
+            user1: {
+                strengths: [
+                    "Excellent problem-solving skills in logic-based exercises.",
+                    "Strong performance in data analysis."
+                ],
+                weaknesses: [
+                    "Needs improvement in time management.",
+                    "Struggles with advanced theoretical concepts."
+                ]
+            },
+            user2: {
+                strengths: [
+                    "Proficient in communication skills.",
+                    "Strong grasp of core programming fundamentals."
+                ],
+                weaknesses: [
+                    "Difficulty with algorithm design.",
+                    "Requires assistance in debugging."
+                ]
+            },
+            user3: {
+                strengths: [
+                    "High accuracy in coding challenges.",
+                    "Good teamwork and collaboration."
+                ],
+                weaknesses: [
+                    "Slow task completion under tight deadlines.",
+                    "Struggles with multitasking."
+                ]
+            }
+        };
+
+        const userSelect = document.getElementById("userSelect");
+        const progressDetails = document.getElementById("progressDetails");
+
+        userSelect.addEventListener("change", () => {
+            const selectedUser = userSelect.value;
+            if (selectedUser && userProgressData[selectedUser]) {
+                const { strengths, weaknesses } = userProgressData[selectedUser];
+
+                // Build progress details dynamically
+                progressDetails.innerHTML = `
+                    <div class="strength">
+                        <h3>Strengths:</h3>
+                        <ul>
+                            ${strengths.map(strength => `<li>${strength}</li>`).join("")}
+                        </ul>
+                    </div>
+                    <div class="weakness">
+                        <h3>Weaknesses:</h3>
+                        <ul>
+                            ${weaknesses.map(weakness => `<li>${weakness}</li>`).join("")}
+                        </ul>
+                    </div>
+                `;
+            } else {
+                progressDetails.innerHTML = `<p>Please select a valid user to view progress.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+

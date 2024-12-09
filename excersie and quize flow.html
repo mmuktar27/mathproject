@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Mastery - Advanced Quiz Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #7754F6;
+            --secondary-color: #F0ECFF;
+            --success-color: #4CAF50;
+            --error-color: #F44336;
+            --warning-color: #FF9800;
+            --text-color: #333;
+            --background-color: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .quiz-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .main-quiz-area {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(119, 84, 246, 0.1);
+            padding: 20px;
+        }
+
+        .scoreboard {
+            background-color: var(--secondary-color);
+            border-radius: 15px;
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+            max-height: 700px;
+            overflow-y: auto;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .encouragement-banner {
+            background-color: rgba(119, 84, 246, 0.1);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .question-container {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .answer-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background-color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(119, 84, 246, 0.1);
+            position: relative;
+        }
+
+        .answer-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .answer-btn.correct {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .answer-btn.incorrect {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .feedback-section {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feedback-correct {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success-color);
+        }
+
+        .feedback-incorrect {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--error-color);
+        }
+
+        .feedback-icon {
+            font-size: 30px;
+        }
+
+        .scoreboard-section {
+            margin-bottom: 20px;
+        }
+
+        .scoreboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .performance-chart {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .performance-segment {
+            height: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .performance-correct {
+            background-color: var(--success-color);
+        }
+
+        .performance-incorrect {
+            background-color: var(--error-color);
+        }
+
+        .difficulty-breakdown {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .difficulty-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .difficulty-progress {
+            width: 100px;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .difficulty-progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        @media (max-width: 1024px) {
+            .quiz-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="main-quiz-area">
+            <div class="encouragement-banner" id="encouragementBanner">
+                You're doing great! Keep solving these math challenges!
+            </div>
+
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <div class="quiz-stat">
+                        <div class="stat-value">3/10</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                    <div class="quiz-stat">
+                        <div class="stat-value">75%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">
+                    If 2x + 5 = 13, what is the value of x?
+                </div>
+
+                <div class="answer-options">
+                    <button class="answer-btn" data-correct="false">x = 3</button>
+                    <button class="answer-btn" data-correct="true">x = 4</button>
+                    <button class="answer-btn" data-correct="false">x = 5</button>
+                    <button class="answer-btn" data-correct="false">x = 6</button>
+                </div>
+
+                <div class="feedback-section" id="feedbackSection" style="display: none;">
+                    <div class="feedback-icon" id="feedbackIcon">✅</div>
+                    <div class="feedback-text" id="feedbackText">
+                        Correct! The solution is x = 4. To solve this, subtract 5 from both sides of the equation.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scoreboard">
+            <div class="scoreboard-section">
+                <div class="scoreboard-header">
+                    <h3>Performance Overview</h3>
+                </div>
+                <div class="performance-chart">
+                    <div class="performance-segment performance-correct" style="width: 70%"></div>
+                    <div class="performance-segment performance-incorrect" style="width: 30%"></div>
+                </div>
+            </div>
+
+            <div class="scoreboard-section">
+                <div class="scoreboard-header">
+                    <h3>Difficulty Breakdown</h3>
+                </div>
+                <div class="difficulty-breakdown">
+                    <div class="difficulty-item">
+                        <span>Easy</span>
+                        <div class="difficulty-progress">
+                            <div class="difficulty-progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="difficulty-item">
+                        <span>Medium</span>
+                        <div class="difficulty-progress">
+                            <div class="difficulty-progress-fill" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <div class="difficulty-item">
+                        <span>Hard</span>
+                        <div class="difficulty-progress">
+                            <div class="difficulty-progress-fill" style="width: 20%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scoreboard-section">
+                <div class="scoreboard-header">
+                    <h3>Question History</h3>
+                </div>
+                <ul id="questionHistory">
+                    <!-- Question history will be dynamically populated -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Encouragement messages
+        const encouragementMessages = [
+            "Awesome work! You're becoming a math champion!",
+            "Keep going! Each problem makes you stronger!",
+            "Fantastic effort! Math is no match for you!",
+            "You're solving problems like a pro!",
+            "Every question you solve is a step towards mastery!"
+        ];
+
+        // Feedback messages
+        const feedbackMessages = {
+            correct: [
+                "Spot on! Great job solving that.",
+                "Excellent! You nailed it.",
+                "Correct! Your problem-solving skills are impressive."
+            ],
+            incorrect: [
+                "Not quite. Let's break this down step by step.",
+                "Close, but let's review the solution together.",
+                "Don't worry, learning from mistakes helps you improve!"
+            ]
+        };
+
+        // Answer button click handler
+        document.querySelectorAll('.answer-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove previous answer states
+                document.querySelectorAll('.answer-btn').forEach(b => {
+                    b.classList.remove('correct', 'incorrect');
+                });
+
+                const isCorrect = this.dataset.correct === "true";
+                const feedbackSection = document.getElementById('feedbackSection');
+                const feedbackIcon = document.getElementById('feedbackIcon');
+                const feedbackText = document.getElementById('feedbackText');
+                const encouragementBanner = document.getElementById('encouragementBanner');
+
+                if (isCorrect) {
+                    this.classList.add('correct');
+                    feedbackSection.classList.remove('feedback-incorrect');
+                    feedbackSection.classList.add('feedback-correct');
+                    feedbackIcon.textContent = '✅';
+                    feedbackText.textContent = feedbackMessages.correct[Math.floor(Math.random() * feedbackMessages.correct.length)];
+                } else {
+                    this.classList.add('incorrect');
+                    // Highlight the correct answer
+                    document.querySelector('.answer-btn[data-correct="true"]').classList.add('correct');
+                    feedbackSection.classList.remove('feedback-correct');
+                    feedbackSection.classList.add('feedback-incorrect');
+                    feedbackIcon.textContent = '❌';
+                    feedbackText.textContent = feedbackMessages.incorrect[Math.floor(Math.random() * feedbackMessages.incorrect.length)];
+                }
+
+                // Update encouragement banner
+                encouragementBanner.textContent = encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
+
+                // Show feedback
+                feedbackSection.style.display = 'flex';
+            });
+        });
+    </script>
+</body>
+</html>
