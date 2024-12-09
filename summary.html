@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Session Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -46,6 +47,7 @@
             color: var(--primary-color);
             font-size: 24px;
             margin-bottom: 20px;
+            text-align: center; /* Ensure it stays centered */
         }
 
         .summary-stat {
@@ -91,6 +93,22 @@
             font-size: 16px;
             color: #666;
         }
+
+        canvas {
+            margin-top: 30px;
+            width: 80%; /* Reduced the width of the chart */
+            height: auto;
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            width: 60%; /* Set a fixed width */
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
     </style>
 </head>
 <body>
@@ -107,7 +125,11 @@
         <div class="summary-stat">
             <div class="stat-label">Accuracy:</div>
             <div class="stat-value" id="accuracy">70%</div>
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
         </div>
+  <!-- Chart showing performance -->
 
         <div class="feedback-section">
             <div class="feedback-text" id="feedbackText">
@@ -116,6 +138,8 @@
         </div>
 
         <button class="retry-button" id="retryButton">Retry</button>
+
+      
     </div>
 
     <script>
@@ -134,7 +158,26 @@
             // Redirect to quiz start page (replace URL with your quiz page)
             window.location.href = "quiz.html";
         });
+
+        // Chart for performance (Pie chart)
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Correct', 'Incorrect'],
+                datasets: [{
+                    data: [correctAnswers, totalQuestions - correctAnswers],
+                    backgroundColor: ['#4CAF50', '#F44336'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' }
+                }
+            }
+        });
     </script>
 </body>
 </html>
-
