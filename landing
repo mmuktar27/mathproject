@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Learning Platform - Navigation Redesign</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #7754F6;
+            --secondary-color: #F0ECFF;
+            --background-color: #FFFFFF;
+            --text-color: #333;
+            --hover-color: #F5F3FF;
+            --accent-color: #4F46E5;
+            --shadow-color: rgba(119, 84, 246, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--background-color);
+            box-shadow: 0 2px 5px var(--shadow-color);
+            padding: 20px 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+        }
+
+        .active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .profile-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .avatar {
+            height: 40px;
+            width: 40px;
+            background-color: var(--hover-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 70px;
+            background-color: var(--background-color);
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: var(--hover-color);
+        }
+
+        .profile-menu:hover .profile-dropdown {
+            display: block;
+        }
+
+        .bg-background {
+            background-color: var(--background-color);
+            padding: 6rem 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        .hero p {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: #6B7280;
+        }
+
+        .announcement {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+
+        .announcement a {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .buttons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .button-primary {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .button-outline {
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            background: transparent;
+        }
+
+        .button-outline:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="/logo.svg" alt="Math Learning Platform">
+            </div>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/quizzes">Quizzes</a>
+                <a href="/tutorials">Tutorials</a>
+                <a href="/store">Store</a>
+                <a href="/teacher-resources">Teacher Resources</a>
+            </div>
+            <div class="profile-menu">
+                <div class="avatar">U</div>
+                <div class="profile-dropdown">
+                    <a href="/profile">Profile</a>
+                    <a href="/dashboard">Dashboard</a>
+                    <a href="/settings">Settings</a>
+                    <a href="/logout">Log out</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="bg-background">
+        <div class="hero">
+            <div class="announcement">
+                Announcing our next round of advanced courses. <a href="/courses">Read more →</a>
+            </div>
+            <h1>DsZAK - Master Mathematics with Interactive Learning</h1>
+            <p>
+                Engage with our interactive quizzes, in-depth tutorials, and personalized learning paths to enhance your math skills and achieve your academic goals.
+            </p>
+            <div class="buttons">
+                <a href="/signup" class="button button-primary">Get started</a>
+                <a href="/about" class="button button-outline">Learn more →</a>
+                <a href="/admin/analytics" class="button button-outline">Admin Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
