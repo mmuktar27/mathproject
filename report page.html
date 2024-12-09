@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics and Reporting</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -43,40 +44,11 @@
             margin-bottom: 10px;
         }
 
-        .analytics-data, .insights-data {
-            margin-top: 15px;
-        }
-
-        .analytics-data div, .insights-data div {
-            background: #f5f5ff;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            color: #555;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            background: var(--primary-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #6442d1;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
+        canvas {
+            max-width: 100%;
+            width: 400px;
+            margin: 20px auto;
+            display: block;
         }
     </style>
 </head>
@@ -87,58 +59,105 @@
         <!-- User Analytics Section -->
         <div class="section">
             <h2>User Analytics</h2>
-            <p>Track user engagement, challenges, and progression to improve content.</p>
-            <div class="analytics-data" id="analyticsData">
-                <!-- User Analytics Data Will Be Populated Dynamically -->
-            </div>
-            <button class="btn" id="loadAnalytics">Load Analytics</button>
+            <canvas id="userEngagementChart"></canvas>
+            <canvas id="userProgressionChart"></canvas>
         </div>
 
         <!-- Tutor Insights Section -->
         <div class="section">
             <h2>Tutor Insights</h2>
-            <p>Access reports showing common difficulties for classes or individuals.</p>
-            <div class="insights-data" id="insightsData">
-                <!-- Tutor Insights Data Will Be Populated Dynamically -->
-            </div>
-            <button class="btn" id="loadInsights">Load Insights</button>
+            <canvas id="classDifficultyChart"></canvas>
+            <canvas id="individualProgressChart"></canvas>
         </div>
     </div>
 
     <script>
-        // Dummy data for demonstration
-        const userAnalytics = [
-            { id: 1, name: "User Engagement", value: "78% active users last week" },
-            { id: 2, name: "Common Challenge", value: "Difficulty in Module 2" },
-            { id: 3, name: "Overall Progression", value: "Average completion rate: 65%" }
-        ];
-
-        const tutorInsights = [
-            { id: 1, category: "Class A", difficulty: "Topic: Advanced Grammar" },
-            { id: 2, category: "Class B", difficulty: "Module 3 Assessments" },
-            { id: 3, category: "Individual - User 5", difficulty: "Struggles with Debugging" }
-        ];
-
-        // Functions to dynamically populate analytics data
-        const analyticsDataContainer = document.getElementById("analyticsData");
-        const insightsDataContainer = document.getElementById("insightsData");
-
-        document.getElementById("loadAnalytics").addEventListener("click", () => {
-            analyticsDataContainer.innerHTML = userAnalytics.map(item => `
-                <div>
-                    <strong>${item.name}:</strong> ${item.value}
-                </div>
-            `).join("");
+        // Chart for User Engagement (Doughnut)
+        const userEngagementCtx = document.getElementById('userEngagementChart').getContext('2d');
+        new Chart(userEngagementCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Active Users', 'Inactive Users'],
+                datasets: [{
+                    data: [78, 22],
+                    backgroundColor: ['#4F46E5', '#F5F3FF'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' }
+                }
+            }
         });
 
-        document.getElementById("loadInsights").addEventListener("click", () => {
-            insightsDataContainer.innerHTML = tutorInsights.map(item => `
-                <div>
-                    <strong>${item.category}:</strong> ${item.difficulty}
-                </div>
-            `).join("");
+        // Chart for User Progression (Line)
+        const userProgressionCtx = document.getElementById('userProgressionChart').getContext('2d');
+        new Chart(userProgressionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Completion Rate (%)',
+                    data: [60, 65, 70, 75],
+                    borderColor: '#4F46E5',
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Chart for Class Difficulty (Bar)
+        const classDifficultyCtx = document.getElementById('classDifficultyChart').getContext('2d');
+        new Chart(classDifficultyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Class A', 'Class B', 'Class C'],
+                datasets: [{
+                    label: 'Reported Challenges',
+                    data: [8, 12, 6],
+                    backgroundColor: ['#4F46E5', '#7754F6', '#A78BFA']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Chart for Individual Progress (Radar)
+        const individualProgressCtx = document.getElementById('individualProgressChart').getContext('2d');
+        new Chart(individualProgressCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Debugging', 'Grammar', 'Assessments', 'Coding'],
+                datasets: [{
+                    label: 'User 5 Progress',
+                    data: [50, 60, 70, 85],
+                    borderColor: '#4F46E5',
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' }
+                }
+            }
         });
     </script>
 </body>
 </html>
-
