@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Mastery - Chapter & Topic Selection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #7754F6;
+            --secondary-color: #F0ECFF;
+            --text-color: #333;
+            --background-color: #FFFFFF;
+            --card-hover-color: #F5F3FF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .welcome-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-text h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .chapter-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(119, 84, 246, 0.1);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: scale(1.05);
+            background-color: var(--card-hover-color);
+        }
+
+        .chapter-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .chapter-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .topics-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(119, 84, 246, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .topic-card {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .topic-card:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .topic-card input[type="checkbox"] {
+            margin-right: 15px;
+        }
+
+        .start-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .start-button:hover {
+            background-color: #5C3FD3;
+        }
+
+        @media (max-width: 1200px) {
+            .chapters-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chapters-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Welcome Header -->
+        <div class="welcome-header">
+            <div class="welcome-text">
+                <h1>Welcome, Emma!</h1>
+                <p>Let's continue your math learning journey!</p>
+            </div>
+            <div class="user-stats">
+                <div class="stat-item">
+                    <div class="stat-value">326</div>
+                    <div class="stat-label">Points</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">42</div>
+                    <div class="stat-label">Sessions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapters Selection -->
+        <h2>Select a Chapter</h2>
+        <div class="chapters-grid">
+            <div class="chapter-card">
+                <div class="chapter-icon">🔢</div>
+                <div class="chapter-title">Algebra Basics</div>
+            </div>
+            <div class="chapter-card">
+                <div class="chapter-icon">📐</div>
+                <div class="chapter-title">Geometry</div>
+            </div>
+            <div class="chapter-card">
+                <div class="chapter-icon">📈</div>
+                <div class="chapter-title">Functions</div>
+            </div>
+            <div class="chapter-card">
+                <div class="chapter-icon">➕</div>
+                <div class="chapter-title">Arithmetic</div>
+            </div>
+            <div class="chapter-card">
+                <div class="chapter-icon">📊</div>
+                <div class="chapter-title">Statistics</div>
+            </div>
+            <!-- Additional chapters would be added here -->
+        </div>
+
+        <!-- Topics Selection -->
+        <div class="topics-container">
+            <h2>Choose Topics for Algebra Basics</h2>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <input type="checkbox" id="topic1">
+                    <label for="topic1">Linear Equations</label>
+                </div>
+                <div class="topic-card">
+                    <input type="checkbox" id="topic2">
+                    <label for="topic2">Quadratic Equations</label>
+                </div>
+                <div class="topic-card">
+                    <input type="checkbox" id="topic3">
+                    <label for="topic3">Inequalities</label>
+                </div>
+                <div class="topic-card">
+                    <input type="checkbox" id="topic4">
+                    <label for="topic4">Exponents</label>
+                </div>
+                <div class="topic-card">
+                    <input type="checkbox" id="topic5">
+                    <label for="topic5">Polynomials</label>
+                </div>
+                <div class="topic-card">
+                    <input type="checkbox" id="topic6">
+                    <label for="topic6">Rational Expressions</label>
+                </div>
+            </div>
+            <button class="start-button">Start Learning</button>
+        </div>
+    </div>
+</body>
+</html>
