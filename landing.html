@@ -27,6 +27,9 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--secondary-color);
             color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
@@ -121,6 +124,7 @@
         .bg-background {
             background-color: var(--background-color);
             padding: 6rem 1rem;
+            flex: 1;
         }
 
         .hero {
@@ -187,6 +191,23 @@
             background-color: var(--accent-color);
             color: #fff;
         }
+
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -230,5 +251,9 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2024 Math Learning Platform. All rights reserved. <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+    </footer>
 </body>
 </html>
